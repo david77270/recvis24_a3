@@ -1,5 +1,5 @@
 """Python file to instantite the model and the transform that goes with it."""
-
+import timm
 from data import data_transforms
 from model import Net, PreTrained
 
@@ -21,6 +21,9 @@ class ModelFactory:
     def init_transform(self):
         if self.model_name == "basic_cnn":
             return data_transforms
+        if self.model_name == "pretrained":
+            data_config = timm.data.resolve_model_data_config(self.model)
+            return timm.data.create_transform(**data_config, is_training=False)
         else:
             raise NotImplementedError("Transform not implemented")
 

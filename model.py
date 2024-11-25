@@ -1,3 +1,4 @@
+import timm
 import torch.nn as nn
 import torch.nn.functional as F
 
@@ -20,3 +21,16 @@ class Net(nn.Module):
         x = x.view(-1, 320)
         x = F.relu(self.fc1(x))
         return self.fc2(x)
+
+
+class PreTrained(nn.Module):
+    def __init__(self):
+        super(PreTrained, self).__init__()
+        self.model = timm.create_model(
+            'eva02_large_patch14_448.mim_m38m_ft_in22k_in1k',
+            pretrained=True,
+            num_classes=nclasses
+        )
+
+    def forward(self, x):
+        return self.model(x)

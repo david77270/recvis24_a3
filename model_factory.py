@@ -1,7 +1,7 @@
 """Python file to instantite the model and the transform that goes with it."""
 
 from data import data_transforms
-from model import Net
+from model import Net, PreTrained
 
 
 class ModelFactory:
@@ -13,6 +13,8 @@ class ModelFactory:
     def init_model(self):
         if self.model_name == "basic_cnn":
             return Net()
+        elif self.model_name == "pretrained":
+            return PreTrained()
         else:
             raise NotImplementedError("Model not implemented")
 

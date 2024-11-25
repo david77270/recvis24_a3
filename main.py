@@ -22,7 +22,7 @@ def opts() -> argparse.ArgumentParser:
     parser.add_argument(
         "--model_name",
         type=str,
-        default="basic_cnn",
+        default="pretrained",
         metavar="MOD",
         help="Name of the model for model and transform instantiation",
     )

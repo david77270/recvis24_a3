@@ -43,7 +43,7 @@ def opts() -> argparse.ArgumentParser:
     parser.add_argument(
         "--lr",
         type=float,
-        default=0.1,
+        default=0.01,
         metavar="LR",
         help="learning rate (default: 0.01)",
     )

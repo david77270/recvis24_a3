@@ -26,11 +26,11 @@ class Net(nn.Module):
 class PreTrained(nn.Module):
     def __init__(self):
         super(PreTrained, self).__init__()
-        self.model = timm.create_model(
+        self.pt_model = timm.create_model(
             'eva02_large_patch14_448.mim_m38m_ft_in22k_in1k',
             pretrained=True,
             num_classes=nclasses
         )
 
     def forward(self, x):
-        return self.model(x)
+        return self.pt_model(x)

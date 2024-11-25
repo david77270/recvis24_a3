@@ -23,7 +23,9 @@ class ModelFactory:
         if self.model_name == "basic_cnn":
             return data_transforms
         if self.model_name == "pretrained":
-            data_config = timm.data.resolve_model_data_config(self.model)
+            data_config = timm.data.resolve_model_data_config(
+                self.model.pt_model
+            )
             orig_transforms = timm.data.create_transform(
                 **data_config,
                 is_training=False

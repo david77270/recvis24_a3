@@ -29,8 +29,14 @@ class PreTrained(nn.Module):
         self.pt_model = timm.create_model(
             'eva02_large_patch14_448.mim_m38m_ft_in22k_in1k',
             pretrained=True,
-            num_classes=nclasses
+            num_classes=0
         )
 
+        for param in self.pt_model.parameters():
+            param.requires_grad = False
+
+        self.classifier = nn.Linear(self.pt_model.num_features, nclasses)
+
     def forward(self, x):
-        return self.pt_model(x)
+        features = self.pt_model(x)
+        return self.classifier(features)

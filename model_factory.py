@@ -2,7 +2,6 @@
 import timm
 from data import data_transforms
 from model import Net, PreTrained
-from torchvision import transforms
 
 
 class ModelFactory:
@@ -26,13 +25,9 @@ class ModelFactory:
             data_config = timm.data.resolve_model_data_config(
                 self.model.pt_model
             )
-            orig_transforms = timm.data.create_transform(
+            pt_transforms = timm.data.create_transform(
                 **data_config,
                 is_training=False
-            )
-            resize_transform = transforms.Resize((448, 448))
-            pt_transforms = transforms.Compose([
-                resize_transform] + list(orig_transforms.transforms)
             )
             return pt_transforms
         else:
